@@ -1,0 +1,17 @@
+﻿@using FDMC.App.Models.ViewModels;
+@model CatDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<form action="/Home/Index" method="get">
+    <input type="submit" value="Back To Home" />
+</form>
+
+<h2>@Model.Name</h2>
+<hr />
+<img src="@Model.ImageUrl" style="max-width:400px" alt="@Model.Name's picture">
+<p><strong>Age: </strong> @Model.Age</p>
+<p><strong>Breed: </strong> @Model.Breed</p>
+
+

@@ -1,0 +1,38 @@
+﻿@using FDMC.Models;
+@model Cat
+
+@{
+    ViewData["Title"] = "Add Cat";
+}
+
+<h2>Add Cat</h2>
+<hr />
+
+<form action="/Home/Index" method="get">
+    <input type="submit" value="Back To Home" />
+</form>
+
+@Html.ValidationSummary(false, "", new { @style = "color:red;" })
+
+<form action="/Cats/Add" method="post">
+    <p>
+        <label asp-for="Name"></label>
+        <input type="text" name="Name" value="" />
+    </p>
+    <p>
+        <label asp-for="Age"></label>
+        <input type="number" name="Age" value="" />
+    </p>
+    <p>
+        <label asp-for="Breed"></label>
+        <input type="text" name="Breed" value="" />
+    </p>
+    <p>
+        <label asp-for="ImageUrl"></label>
+        <input type="text" name="ImageURL" value="" />
+    </p>
+    <p>
+        <input type="submit" value="Add Cat" />
+    </p>
+</form>
+

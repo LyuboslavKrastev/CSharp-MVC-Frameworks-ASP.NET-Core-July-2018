@@ -1,0 +1,23 @@
+﻿@using FDMC.App.Models.ViewModels;
+@model IEnumerable<CatDetailsViewModel>
+
+@{
+    ViewData["Title"] = "All Cats";
+}
+
+<h2>All Cats</h2>
+
+<hr />
+
+<form action="/Home/Index" method="get">
+    <input type="submit" value="Back To Home" />
+</form>
+
+@foreach (var cat in Model)
+{
+    <p><strong>Name: @cat.Name</strong></p>
+    <img src="@cat.ImageUrl" style="max-width:400px" alt="@cat.Name's picture">
+    <p><strong>Age: </strong> @cat.Age</p>
+    <p><strong>Breed: </strong> @cat.Breed</p>
+    <hr />
+}

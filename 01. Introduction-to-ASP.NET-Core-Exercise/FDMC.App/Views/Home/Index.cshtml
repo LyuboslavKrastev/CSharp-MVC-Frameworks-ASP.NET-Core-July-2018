@@ -1,0 +1,34 @@
+﻿@using FDMC.App.Models.ViewModels
+
+@model IEnumerable<CatListingViewModel>
+
+@{ 
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to FDMC!</h1>
+
+<hr />
+
+<div style="width:300px;">
+    <div style="float: left; width: 70px">
+        <form action="/Cats/Add" method="get">
+            <input type="submit" value="Add Cat" />
+        </form>
+    </div>
+    <div style="float: left; width: 70px">
+        <form action="/Cats/All" method="get">
+            <input type="submit" value="All Cats" />
+        </form>
+    </div>
+</div>
+
+<br />
+
+<ul>
+    @foreach (var cat in this.Model)
+    {
+        <li><a asp-controller="Cats" asp-action="Details" asp-route-id="@cat.Id">@cat.Name</a></li>
+    }
+</ul>
+
