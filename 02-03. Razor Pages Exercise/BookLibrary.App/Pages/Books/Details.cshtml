@@ -1,0 +1,53 @@
+﻿@page "{id}"
+@model BookLibrary.App.Pages.Books.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row">
+    <div class="col-4">
+        <img src="@Model.ImageUrl" alt="Cover image for @Model.Title" />
+    </div>
+
+    <div class="col-8 alert">
+        <h2>@Model.Title</h2>
+        <h5>by @Model.Author</h5>
+
+        <p>@Model.Description</p>
+    </div>
+</div>
+<br />
+
+<a class="btn btn-md btn-warning" asp-page="/Books/Borrow" asp-route-id="@Model.Id">Borrow this book</a>
+<a class="btn btn-md btn-info" asp-page="/Books/Status" asp-route-id="@Model.Id">Show history</a>
+<hr />
+@if (Model.IsBorrowed)
+{
+    <h4 class="alert alert-warning text-center">This book wont be available during the following periods:</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Borrowed By</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var borrowingPeriod in Model.UnavailablePeriods)
+            {
+                <tr>
+                    <td>@borrowingPeriod.StartDate.ToShortDateString()</td>
+                    <td>@(string.IsNullOrEmpty(borrowingPeriod.EndDate.ToString()) ? "N/A" : borrowingPeriod.EndDate.Value.ToShortDateString())</td>
+                    <td>@borrowingPeriod.Borrower.Name</td>
+                    <td>
+                        <form method="POST">
+                            <button class="btn btn-success" type="submit" value="@borrowingPeriod.Id" name="borrowedId" >Return This Book</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

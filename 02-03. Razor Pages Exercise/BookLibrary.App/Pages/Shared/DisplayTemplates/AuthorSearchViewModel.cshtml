@@ -1,0 +1,8 @@
+﻿@model AuthorSearchViewModel
+
+@{
+    string url = Url.Page($"/Authors/Details", new { id = Model.Id });
+}
+<li>
+    <a href="@url">@Html.Raw(Model.Name) </a>(author)
+</li>

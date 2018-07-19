@@ -1,0 +1,26 @@
+﻿@page
+@model BookLibrary.App.Pages.Books.StatusModel
+@{
+    ViewData["Title"] = "Status";
+}
+
+<h4 class="alert alert-info text-center">This book has been borrowed during the following periods:</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Borrowed By</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var borrowingPeriod in Model.BorrowingPeriods)
+        {
+        <tr>
+            <td>@borrowingPeriod.StartDate.ToShortDateString()</td>
+            <td>@(string.IsNullOrEmpty(borrowingPeriod.EndDate.ToString()) ? "N/A" : borrowingPeriod.EndDate.Value.ToShortDateString())</td>
+            <td>@borrowingPeriod.BorrowerName</td>
+        </tr>
+        }
+    </tbody>
+</table>
