@@ -1,0 +1,50 @@
+﻿@page
+@model BookLibrary.App.Pages.Books.AddModel
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<h2>Add Book</h2>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form method="post">
+    <form-control asp-for="Title"></form-control>
+    <div class="form-group row">
+        <label asp-for="Title" class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+            <input asp-for="Title" class="form-control">
+            <span asp-validation-for="Title" class="text-danger"></span>        
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Description" class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Author" class="col-sm-2 col-form-label">Author</label>
+        <div class="col-sm-10">
+            <input asp-for="Author" class="form-control">
+            <span asp-validation-for="Author" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="ImageUrl" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="ImageUrl" class="form-control">
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10 offset-2">
+            <input type="submit" class="btn btn-success" value="Add book">
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

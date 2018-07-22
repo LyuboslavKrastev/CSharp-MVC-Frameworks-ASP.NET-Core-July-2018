@@ -1,0 +1,63 @@
+﻿@model ProductDetailsViewModel
+@{
+    ViewData["Title"] = "ProductDetails";
+}
+
+<h2>Details for @Model.Title (@Model.Type)</h2>
+
+<div class="row">
+    <div class="col-4">
+        <img src="@Model.ImageUrl" style="max-width: 400px" alt="Cover image for @Model.Title" />
+    </div>
+
+    <div class="col-8 alert">
+        <h2>@Model.Title</h2>
+        <h5>by @Model.Creator</h5>
+
+        <p>@Model.Description</p>
+    </div>
+</div>
+<br />
+
+@if (Model.Type == "Book")
+{
+    <a class="btn btn-md btn-warning" asp-page="/Books/Borrow" asp-route-id="@Model.Id">Borrow @Model.Title</a>
+    <a class="btn btn-md btn-info" asp-page="/Books/Status" asp-route-id="@Model.Id">Show history</a>
+}
+else
+{
+    <a class="btn btn-md btn-warning" asp-controller="Movies" asp-action="Borrow" asp-route-id="@Model.Id">Borrow @Model.Title</a>
+    <a class="btn btn-md btn-info" asp-controller="Movies" asp-action="Status" asp-route-id="@Model.Id">Show history</a>
+}
+
+<hr />
+@if (Model.IsBorrowed)
+{
+    <h4 class="alert alert-warning text-center">@Model.Title wont be available during the following periods:</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Borrowed By</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var borrowingPeriod in Model.UnavailablePeriods)
+            {
+                <tr>
+                    <td>@borrowingPeriod.StartDate.ToShortDateString()</td>
+                    <td>@(string.IsNullOrEmpty(borrowingPeriod.EndDate.ToString()) ? "N/A" : borrowingPeriod.EndDate.Value.ToShortDateString())</td>
+                    <td>@borrowingPeriod.BorrowerName</td>
+                    <td>
+                        <form method="POST">
+                            <button class="btn btn-success" type="submit" value="@borrowingPeriod.Id" name="borrowedId">Return This Product</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
