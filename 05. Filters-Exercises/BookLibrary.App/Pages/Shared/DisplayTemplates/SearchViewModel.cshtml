@@ -1,0 +1,13 @@
+﻿@model SearchViewModel
+
+<li>
+    @if (Model.Type == "Director" || Model.Type == "Movie")
+    {
+        <a asp-controller="@($"{Model.Type}s")" asp-action="Details" asp-route-id="@Model.Id">@Html.Raw(Model.Name)</a>
+    }
+    else
+    {
+        <a asp-page="/@($"{Model.Type}s")/Details" asp-route-id="@Model.Id">@Html.Raw(Model.Name)</a>
+    }
+    (@Model.Type)
+</li>

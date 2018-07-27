@@ -1,0 +1,28 @@
+﻿@model ICollection<ProductHistoryViewModel>
+
+@{
+    ViewData["Title"] = "Status";
+}
+
+<h2>Status</h2>
+<h4 class="alert alert-info text-ce
+    nter">This movie has been borrowed during the following periods:</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Borrowed By</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var borrowingPeriod in Model)
+        {
+            <tr>
+                <td>@borrowingPeriod.StartDate.ToShortDateString()</td>
+                <td>@(string.IsNullOrEmpty(borrowingPeriod.EndDate.ToString()) ? "N/A" : borrowingPeriod.EndDate.Value.ToShortDateString())</td>
+                <td>@borrowingPeriod.BorrowerName</td>
+            </tr>
+        }
+    </tbody>
+</table>

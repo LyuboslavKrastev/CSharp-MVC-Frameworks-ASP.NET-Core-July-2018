@@ -1,0 +1,40 @@
+2018-07-27 21:35:59.666 +03:00 [INF] Starting web host
+2018-07-27 21:36:00.179 +03:00 [INF] User profile is available. Using 'C:\Users\Zorko\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-07-27 21:36:00.539 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:44337/  
+2018-07-27 21:36:00.892 +03:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing action /Index
+2018-07-27 21:36:01.017 +03:00 [INF] Executing GET with action /Index.
+2018-07-27 21:36:01.018 +03:00 [INF] Model state: valid
+2018-07-27 21:36:01.024 +03:00 [INF] Executing handler method OnGet with arguments (null) - ModelState is "Valid"
+2018-07-27 21:36:01.282 +03:00 [INF] Entity Framework Core 2.1.1-rtm-30846 initialized 'BookLibraryAppContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=BookLibrary.App 
+2018-07-27 21:36:01.546 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[Id], [b].[AuthorId], [b].[CoverImage], [b].[Description], [b].[Title], [b.Author].[Id], [b.Author].[Name]
+FROM [Books] AS [b]
+INNER JOIN [Authors] AS [b.Author] ON [b].[AuthorId] = [b.Author].[Id]
+ORDER BY [b].[Title], [b].[Id]
+2018-07-27 21:36:01.624 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b.Borrowers].[Id], [b.Borrowers].[BookId], [b.Borrowers].[BorrowerId], [b.Borrowers].[EndDate], [b.Borrowers].[IsAvailable], [b.Borrowers].[StartDate]
+FROM [BorrowedBooks] AS [b.Borrowers]
+INNER JOIN (
+    SELECT DISTINCT [b0].[Id], [b0].[Title]
+    FROM [Books] AS [b0]
+    INNER JOIN [Authors] AS [b.Author0] ON [b0].[AuthorId] = [b.Author0].[Id]
+) AS [t] ON [b.Borrowers].[BookId] = [t].[Id]
+ORDER BY [t].[Title], [t].[Id]
+2018-07-27 21:36:01.678 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[Id], [b].[Description], [b].[DirectorId], [b].[PosterImage], [b].[Title], [b.Director].[Id], [b.Director].[Name]
+FROM [Movies] AS [b]
+INNER JOIN [Directors] AS [b.Director] ON [b].[DirectorId] = [b.Director].[Id]
+ORDER BY [b].[Title], [b].[Id]
+2018-07-27 21:36:01.704 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b.Borrowers].[Id], [b.Borrowers].[BorrowerId], [b.Borrowers].[EndDate], [b.Borrowers].[IsAvailable], [b.Borrowers].[MovieId], [b.Borrowers].[StartDate]
+FROM [BorrowedMovies] AS [b.Borrowers]
+INNER JOIN (
+    SELECT DISTINCT [b0].[Id], [b0].[Title]
+    FROM [Movies] AS [b0]
+    INNER JOIN [Directors] AS [b.Director0] ON [b0].[DirectorId] = [b.Director0].[Id]
+) AS [t] ON [b.Borrowers].[MovieId] = [t].[Id]
+ORDER BY [t].[Title], [t].[Id]
+2018-07-27 21:36:01.716 +03:00 [INF] Executed GET Index./Index in 0.6979889 s.
+2018-07-27 21:36:01.799 +03:00 [INF] Accessing expired session, Key:491a7a21-c77a-541d-9f8e-d4c52283ec06
+2018-07-27 21:36:01.834 +03:00 [INF] Executed action /Index in 937.926ms
+2018-07-27 21:36:01.845 +03:00 [INF] Request finished in 1308.911ms 200 text/html; charset=utf-8
